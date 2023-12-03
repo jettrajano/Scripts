@@ -1,0 +1,25 @@
+## Bing
+Claro, posso ajudá-lo a criar um script PowerShell para remover endereços de proxy no Active Directory local. Aqui está um exemplo de como você pode fazer isso. Este script pressupõe que seu arquivo CSV tem uma coluna chamada 'user' que contém o nome do usuário:
+
+# Importar o módulo Active Directory
+Import-Module ActiveDirectory
+
+# Importar usuários do arquivo CSV
+$users = Import-Csv -Path C:\caminho\para\seu\arquivo.csv
+
+foreach ($user in $users) {
+    # Obter o usuário do Active Directory
+    $adUser = Get-ADUser -Identity $user.user -Properties ProxyAddresses
+
+    # Remover os endereços de proxy
+    $removeProxyAddresses = @("@pratidonaduzzi.onmicrosoft.com", "@pratidonaduzzi.mail.onmicrosoft.com") | ForEach-Object { "$($user.user)$_" }
+
+    # Remover os endereços de proxy da lista existente
+    $adUser.ProxyAddresses = $adUser.ProxyAddresses | Where-Object { $_ -notin $removeProxyAddresses }
+
+    # Atualizar o usuário do Active Directory
+    Set-ADUser -Identity $user.user -ProxyAddresses $adUser.ProxyAddresses
+}
+
+Por favor, substitua C:\caminho\para\seu\arquivo.csv pelo caminho do seu arquivo CSV. Este script removerá os sufixos '@pratidonaduzzi.onmicrosoft.com' e '@pratidonaduzzi.mail.onmicrosoft.com' do nome do usuário para cada usuário no arquivo CSV e atualizará o atributo ProxyAddresses no Active Directory.
+Nota: Este é apenas um exemplo e pode precisar ser ajustado para se adequar ao seu ambiente e requisitos específicos. Além disso, lembre-se de que a modificação de atributos do Active Directory pode ter efeitos significativos, portanto, sempre teste tais scripts em um ambiente seguro antes de usá-los em produção. Se você não tem certeza ou não se sente confortável em fazer essas alterações, recomendo entrar em contato com um administrador de sistemas ou um profissional de TI.

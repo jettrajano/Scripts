@@ -1,0 +1,27 @@
+Claro, posso ajudá-lo a criar um script PowerShell para adicionar os endereços proxy no Active Directory local importando de um arquivo CSV. Aqui está um exemplo de como você pode fazer isso:
+
+```powershell
+# Importar o módulo Active Directory
+Import-Module ActiveDirectory
+
+# Importar os dados do arquivo CSV
+$usuarios = Import-Csv -Path C:\caminho\para\seu\arquivo.csv
+
+foreach ($usuario in $usuarios) {
+    # Obter o usuário do Active Directory
+    $adUser = Get-ADUser -Identity $usuario.SamAccountName
+
+    # Adicionar o endereço proxy
+    $proxyAddresses = $adUser.proxyAddresses
+    $proxyAddresses += $usuario.ProxyAddress
+
+    # Atualizar o usuário do Active Directory
+    Set-ADUser -Identity $usuario.SamAccountName -Replace @{proxyAddresses = $proxyAddresses}
+}
+```
+
+Este script assume que seu arquivo CSV tem colunas para `SamAccountName` e `ProxyAddress`. Por favor, substitua `C:\caminho\para\seu\arquivo.csv` pelo caminho real do seu arquivo CSV.
+
+Lembre-se de executar este script com privilégios suficientes para modificar os usuários do Active Directory.
+
+**Nota:** Este é apenas um exemplo e pode precisar ser ajustado para se adequar ao seu ambiente e requisitos específicos. Sempre teste scripts em um ambiente seguro antes de usá-los em produção.

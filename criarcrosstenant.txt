@@ -1,0 +1,23 @@
+59efdc19-dccc-4611-b2c6-73ddc2b46e55
+
+Destino:
+Display name
+:
+MyCrossTenantMailboxMigrationApp
+Application (client) ID:59efdc19-dccc-4611-b2c6-73ddc2b46e55
+
+Object ID: e7b1b5f1-ef0e-46d5-9882-d7febab01668
+
+Directory (tenant) ID: 6bab6233-4c6d-4f2e-9abd-fd3f7689201b
+
+
+secret value
+42G8Q~yH5FrO6zxgtRbnexRwJPu8esXnfAw7zcjw
+
+Secre ID
+9ae3c1ae-d5d8-46b9-a87d-e3dcb5bc3e2a
+
+https://login.microsoftonline.com/6bab6233-4c6d-4f2e-9abd-fd3f7689201b/adminconsent?client_id=[59efdc19-dccc-4611-b2c6-73ddc2b46e55]&redirect_uri=https://office.com
+
+
+https://login.microsoftonline.com/6bab6233-4c6d-4f2e-9abd-fd3f7689201b/adminConsent?client_id=59efdc19-dccc-4611-b2c6-73ddc2b46e55&redirect_uri=https://portal.azure.com/TokenAuthorize

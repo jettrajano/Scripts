@@ -1,0 +1,2 @@
+﻿$mycredentials = Get-Credential
+Send-MailMessage -SmtpServer smtp.office365.com -Port 587 -UseSsl -From cteste@lightenginesa.com -To ediplo@sou.cloud -Subject 'Test subject' -Body 'Teste feito para disparo smptp e POP' -Credential $mycredentials ##-Attachments "C:\MYFILE.TXT"
