@@ -1,0 +1,26 @@
+# Importar o módulo Active Directory
+Import-Module ActiveDirectory
+
+# Caminho para o arquivo CSV
+$csvPath = "C:\Temp\ListaSmtpProxy.csv"
+
+# Ler o arquivo CSV
+$csvData = Import-Csv -Path $csvPath
+
+# Loop através das linhas do CSV
+foreach ($row in $csvData) {
+    $username = $row."Nome do Usuário"  # Certifique-se de que o cabeçalho do CSV corresponde ao nome correto
+    $proxyAddress = $row."Endereço Proxy"  # Certifique-se de que o cabeçalho do CSV corresponde ao nome correto
+
+    # Verificar se o usuário existe no Active Directory
+    if (Get-ADUser -Filter {SamAccountName -eq $username}) {
+        # Adicionar o endereço proxy ao usuário
+        Set-ADUser -Identity $username -Add @{proxyAddresses="$proxyAddress"}
+        Write-Host "Endereço Proxy ($proxyAddress) adicionado com sucesso para $username."
+    } else {
+        Write-Host "Usuário $username não encontrado no Active Directory. Endereço Proxy não adicionado."
+    }
+}
+
+Write-Host "Concluído."
+

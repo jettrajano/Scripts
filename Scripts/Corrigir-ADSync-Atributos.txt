@@ -1,0 +1,17 @@
+## Definição remota
+Set-ExecutionPolicy RemoteSigned
+## ativa conexão sobre tls.12 
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+## Instala os modulos necessários caso não tenha.
+Install-module AzureADPreview -Force
+Install-Module MSOnline
+Import-Module AzureAD
+## Conecta aos modulos
+Connect-AzureAD 
+Connect-MsolService
+## Comando para limpar o atributo do usuário sincronizado.
+Get-MsolUser -UserPrincipalName fulano@mecur.com.br | Set-MsolUser -ImmutableId $null
+
+## Comando para limpar o atributo do usuário sincronizado dentro do azureAD
+Get-MsolUser -UserPrincipalName 317496ee-974d-477f-ad7e-7e7dd5fcf0fe | Set-MsolUser -ImmutableId $null
+
